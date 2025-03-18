@@ -15,9 +15,9 @@ x = np.full(N, 0.1)
 y = np.full(N, 7.1)
 # Calcolo del vettore risultante dalla somma ponderata di x e y moltiplicati per a
 d = a * x + y
-
+print (d)
 # Stampa della lunghezza di d per verificare che sia corretta
-print(len(d))  # Ho paura esploda tutto, verifica che sia 10**6 e 10**8
+print(len(d))  
 # Verifica che tutti gli elementi di d siano vicini a 7.4
 print(np.allclose(d, [7.4] * len(d)))
 

@@ -42,6 +42,16 @@ else:
     print("Errore nel calcolo ❌")
 
 ```
+
+## Run the code 
+
+On terminal, then write N from the options
+
+```
+ python3 vector_sum.py
+
+```
+
 ## matrix_mul.py
 
 ```python
@@ -104,6 +114,15 @@ else:
     print("\nN=10000: il prodotto completo è troppo oneroso in Python (tempo/memoria).")
     print(f"Per A=3 e B=7.1, ogni elemento di C dovrebbe essere: 21.3 * N = {expected}")
     print("Questo è il valore atteso da usare per il test.")
+
+```
+
+## Run the code 
+
+On terminal, then write N from the options
+
+```
+ python3 matrix_mul.py
 
 ```
 
@@ -188,6 +207,23 @@ int main() {
 
     return 0;
 }
+
+```
+
+## Run the code 
+
+On terminal:
+
+Compile the code:
+
+```
+ gcc -02 vector_sum.c -o vector_sum
+
+```
+Run the code, then write N from the options:
+
+```
+./vector_sum
 
 ```
 
@@ -322,3 +358,21 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+```
+
+## Run the code 
+
+On terminal:
+
+Compile the code:
+
+```
+ gcc -02 matrix_mul.c -o matrix_mul
+
+```
+Run the code, then write N from the options:
+
+```
+./matrix_mul
+
+```

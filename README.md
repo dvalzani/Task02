@@ -234,20 +234,57 @@ Run the code, then write N from the options:
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <errno.h>
+#include <string.h>
 
 static int almost_equal(double a, double b, double abs_tol) {
     return fabs(a - b) <= abs_tol;
 }
 
-int main(int argc, char **argv) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s N\n", argv[0]);
-        return 1;
+/*
+ * Legge un intero long da input (stdin) con validazione base.
+ * Ritorna 1 se OK e scrive in *out; 0 se errore.
+ */
+static int read_long_from_stdin(const char *prompt, long *out) {
+    char buf[256];
+
+    printf("%s", prompt);
+    fflush(stdout);
+
+    if (!fgets(buf, sizeof(buf), stdin)) {
+        return 0;
     }
 
-    long N = atol(argv[1]);
+    // rimuovi newline
+    buf[strcspn(buf, "\r\n")] = '\0';
+
+    errno = 0;
+    char *endp = NULL;
+    long val = strtol(buf, &endp, 10);
+
+    if (errno != 0) {
+        return 0;
+    }
+    if (endp == buf || *endp != '\0') { // niente numero o caratteri extra
+        return 0;
+    }
+
+    *out = val;
+    return 1;
+}
+
+int main(void) {
+    long N;
+
+    printf("Programma: C = A * B con A=3, B=7.1\n");
+    printf("Nota: per N <= 100 calcolo davvero la matmul; per N grandi uso la soluzione analitica.\n\n");
+
+    if (!read_long_from_stdin("Inserisci N (es. 10, 100, 10000): ", &N)) {
+        fprintf(stderr, "Errore: input non valido.\n");
+        return 1;
+    }
     if (N <= 0) {
-        fprintf(stderr, "Error: N must be > 0\n");
+        fprintf(stderr, "Errore: N deve essere > 0.\n");
         return 1;
     }
 
@@ -256,8 +293,7 @@ int main(int argc, char **argv) {
     const double expected = (a_val * b_val) * (double)N; // 21.3 * N
     const double tol = 1e-9;
 
-    printf("Programma: C = A * B con A=3, B=7.1\n");
-    printf("N = %ld\n", N);
+    printf("\nN = %ld\n", N);
     printf("Valore atteso per ogni C[i][j] = %.10f\n\n", expected);
 
     // Per N "piccoli" facciamo davvero la moltiplicazione completa
@@ -357,6 +393,7 @@ int main(int argc, char **argv) {
     printf("\nVerifica (analitica): OK\n");
     return 0;
 }
+
 
 ```
 

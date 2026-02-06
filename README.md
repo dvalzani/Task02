@@ -410,6 +410,29 @@ Compile the code:
 Run the code, then write N from the options:
 
 ```
+
 ./matrix_mul
 
 ```
+
+**Answer the question**
+1) Yes, problems were encountered for large values of N, especially for N = 10⁸ when using the interpreted language (Python).
+The main issues are related to memory usage and execution time.
+In Python, vectors are stored as lists of objects, which require a significant amount of memory. Creating and handling multiple vectors of size 10⁸ can be very slow and memory intensive.
+Additionally, printing large amounts of data to the terminal dramatically slows down execution.
+
+In the compiled language (C), the same operations are much more memory-efficient and faster, since arrays are stored as contiguous memory blocks and arithmetic operations are compiled to machine code.
+However, for very large N, the execution time is still limited by memory bandwidth rather than pure computation speed.
+
+2) Yes, the correctness of the results was tested for all points.
+
+For the vector sum (points 1 and 2), the analytical expected result is:
+
+𝑑=𝑎⋅𝑥+𝑦=3⋅0.1+7.1=7.4. d=a⋅x+y=3⋅0.1+7.1=7.4.
+
+The test was performed by printing a limited number of elements (the first and the last ones) and by checking that all values were approximately equal to 7.4 within a numerical tolerance, to account for floating-point precision.
+
+For the matrix multiplication (point 3), the verification was performed by printing small blocks of the resulting matrix (top-left and bottom-right corners) and checking that all printed elements had the same value, as expected from the analytical result.
+
+For small matrix sizes (N = 10 and N = 100), this method allows a direct and explicit verification of the result.
+For very large values of N (e.g. N = 10000), printing or explicitly checking all matrix elements is not feasible due to memory and time constraints, therefore only partial output inspection or analytical reasoning can be used to validate the result.
